@@ -1,5 +1,5 @@
 const timer = (deadline) => {
-  console.log(deadline);
+  // console.log(deadline);
   const timerHours = document.getElementById("timer-hours");
   const timerMinutes = document.getElementById("timer-minutes");
   const timerSeconds = document.getElementById("timer-seconds");
@@ -19,6 +19,7 @@ const timer = (deadline) => {
   };
   const updateCLock = () => {
     let getTime = getTimeRemaining();
+
     const addZero = (elem) => {
       if (String(elem).length === 1) {
         return "0" + elem;
@@ -32,7 +33,7 @@ const timer = (deadline) => {
     // if (getTime.timeRemaining > 0) {
     //   setTimeout(updateCLock, 1000);
     // }
-    if (getTime.timeRemaining <= 0) {
+    if (getTime.timeRemaining < 0) {
       clearInterval(idUpdateClock);
       timerHours.textContent = addZero(0);
       timerMinutes.textContent = addZero(0);
@@ -41,6 +42,7 @@ const timer = (deadline) => {
   };
   // updateCLock();
   idUpdateClock = setInterval(updateCLock, 1000);
+  updateCLock();
 };
 
 export default timer;
