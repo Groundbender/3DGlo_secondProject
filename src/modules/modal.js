@@ -10,8 +10,6 @@ const modal = () => {
   let count = 5;
   let idPopup;
 
-  // modalDialog.style.transform = `translateY(-100%) translateX(-50px)`;
-
   const showAnimation = () => {
     if (start < finish) {
       position += count;
@@ -28,11 +26,6 @@ const modal = () => {
     if (condition) {
       idPopup = requestAnimationFrame(showAnimation);
     }
-    // if (start > finish ? position > finish : position < finish) {
-    // idPopup = requestAnimationFrame(showAnimation);
-    // }
-
-    // idPopup = requestAnimationFrame(showAnimation);
   };
   buttons.forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -41,10 +34,10 @@ const modal = () => {
         position = start;
         idPopup = requestAnimationFrame(showAnimation);
       }
-      console.log(start);
-      console.log(finish);
-      console.log(position);
-      console.log(count);
+      // console.log(start);
+      // console.log(finish);
+      // console.log(position);
+      // console.log(count);
     });
   });
   closeBtn.addEventListener("click", () => {
