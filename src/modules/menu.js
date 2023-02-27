@@ -15,11 +15,18 @@ const menu = () => {
 
   menuBtn.addEventListener("click", handleMenu);
 
-  closeBtn.addEventListener("click", handleMenu);
+  menu.addEventListener("click", (e) => {
+    if (e.target.classList.contains("close-btn")) {
+      handleMenu();
+    } else if (e.target.matches("ul>li>a")) {
+      handleMenu();
+    }
+  });
+  // closeBtn.addEventListener("click", handleMenu);
 
-  menuItems.forEach((menuItem) =>
-    menuItem.addEventListener("click", handleMenu)
-  );
+  // menuItems.forEach((menuItem) =>
+  //   menuItem.addEventListener("click", handleMenu)
+  // );
 };
 
 export default menu;

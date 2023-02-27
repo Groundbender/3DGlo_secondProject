@@ -2,7 +2,7 @@ const anchorsAnimate = () => {
   const menu = document.querySelector("menu");
   let menuItems = menu.querySelectorAll('ul>li>a[href*="#"]');
   const skipBtn = document.querySelector("a[href='#service-block']");
-  console.log(skipBtn);
+  // console.log(skipBtn);
   menuItems.forEach((link) => {
     link.addEventListener("click", (e) => {
       e.preventDefault();
