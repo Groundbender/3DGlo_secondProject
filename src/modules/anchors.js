@@ -7,7 +7,7 @@ const anchorsAnimate = () => {
     link.addEventListener("click", (e) => {
       e.preventDefault();
       let blockID = link.getAttribute("href");
-      console.log(blockID);
+      // console.log(blockID);
       document.querySelector("" + blockID).scrollIntoView({
         block: "start",
         behavior: "smooth",
