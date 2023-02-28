@@ -30,6 +30,7 @@ const modal = () => {
   buttons.forEach((btn) => {
     btn.addEventListener("click", () => {
       modal.style.display = "block";
+      document.body.style.overflow = "hidden";
       if (screen.width > 768) {
         position = start;
         idPopup = requestAnimationFrame(showAnimation);
@@ -45,6 +46,7 @@ const modal = () => {
       e.target.classList.contains("popup-close")
     ) {
       modal.style.display = "none";
+      document.body.style.overflow = "";
     }
   });
 };

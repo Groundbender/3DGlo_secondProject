@@ -13,15 +13,20 @@ const menu = () => {
     menu.classList.toggle("active-menu");
   };
 
-  menuBtn.addEventListener("click", handleMenu);
-
-  menu.addEventListener("click", (e) => {
-    if (e.target.classList.contains("close-btn")) {
+  document.addEventListener("click", (e) => {
+    if (e.target.closest(".menu")) {
       handleMenu();
-    } else if (e.target.matches("ul>li>a")) {
+    } else if (
+      !e.target.closest("menu") ||
+      e.target.classList.contains("close-btn")
+    ) {
+      menu.classList.remove("active-menu");
+    } else if (e.target.matches("ul>li>a") && e.target.closest("menu")) {
       handleMenu();
     }
   });
+
+  // menu.addEventListener("click", (e) => {});
   // closeBtn.addEventListener("click", handleMenu);
 
   // menuItems.forEach((menuItem) =>
