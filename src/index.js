@@ -7,13 +7,12 @@ import tabs from "./modules/tabs";
 import slider from "./modules/slider";
 import calc from "./modules/calc";
 
-timer("1 marth 2023");
+timer("3 marth 2023");
 menu();
 modal();
 anchorsAnimate();
 validation();
 tabs();
-calc(100);
 
 slider(
   "portfolio-content",
@@ -23,3 +22,5 @@ slider(
   "dot-active",
   "portfolio-btn"
 );
+
+calc(100);
