@@ -44,5 +44,6 @@ const timer = (deadline) => {
   idUpdateClock = setInterval(updateCLock, 1000);
   updateCLock();
 };
+timer("24 february 2023");
 
 export default timer;
