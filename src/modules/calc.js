@@ -1,3 +1,5 @@
+import { animate } from "./helpers";
+
 const calc = (price = 100) => {
   const calcBlock = document.querySelector(".calc-block");
   const calcType = document.querySelector(".calc-type");
@@ -6,22 +8,22 @@ const calc = (price = 100) => {
   const calcDay = document.querySelector(".calc-day");
   const total = document.querySelector("#total");
 
-  const time = 100;
-  const render = (number) => {
-    const step = Number(String(number).slice(0, -2));
+  // const time = 100;
+  // const render = (number) => {
+  //   const step = Number(String(number).slice(0, -2));
 
-    let num = 0;
-    let frequency = Math.round(time / (num / step));
-    let interval = setInterval(() => {
-      if (calcType.value && calcSquare.value) {
-        num += step;
-        total.textContent = num;
-        if (num === number) {
-          clearInterval(interval);
-        }
-      }
-    }, frequency);
-  };
+  //   let num = 0;
+  //   let frequency = Math.round(time / (num / step));
+  //   let interval = setInterval(() => {
+  //     if (calcType.value && calcSquare.value) {
+  //       num += step;
+  //       total.textContent = num;
+  //       if (num === number) {
+  //         clearInterval(interval);
+  //       }
+  //     }
+  //   }, frequency);
+  // };
   const countCalc = () => {
     const calcTypeValue = +calcType.options[calcType.selectedIndex].value;
     const calcSquareValue = calcSquare.value;
@@ -41,13 +43,14 @@ const calc = (price = 100) => {
     if (calcType.value && calcSquare.value) {
       totalValue =
         price * calcTypeValue * calcSquareValue * calcCountValue * calcDayValue;
-      total.textContent = render(totalValue);
+      // total.textContent = render(totalValue);
     } else {
       totalValue = 0;
     }
 
-    total.textContent = totalValue;
+    // total.textContent = totalValue;
     // console.log(totalValue);
+    return totalValue;
   };
   calcBlock.addEventListener("input", (e) => {
     if (
@@ -56,7 +59,16 @@ const calc = (price = 100) => {
       e.target === calcCount ||
       e.target === calcDay
     ) {
-      countCalc();
+      let totalValue = countCalc();
+      animate({
+        duration: 500,
+        timing(timeFraction) {
+          return timeFraction;
+        },
+        draw(progress) {
+          total.textContent = Math.round(totalValue * progress);
+        },
+      });
     }
   });
 };
