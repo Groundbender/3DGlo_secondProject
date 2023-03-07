@@ -7,6 +7,7 @@ import tabs from "./modules/tabs";
 import slider from "./modules/slider";
 import calc from "./modules/calc";
 import { swiperFunc } from "./modules/swiper";
+import sendForm from "./modules/sendForm";
 
 timer("3 marth 2023");
 menu();
@@ -26,3 +27,5 @@ slider(
 
 calc(100);
 swiperFunc();
+
+sendForm("form1");
