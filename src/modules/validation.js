@@ -47,7 +47,7 @@ const validation = () => {
       e.target.value = e.target.value.replace(/\-{2,}/g, "-");
     });
     inputTel.addEventListener("input", (e) => {
-      e.target.value = e.target.value.replace(/[^\d\(\)\-]/g, "");
+      e.target.value = e.target.value.replace(/[^\d\(\)\-\+]/g, "");
     });
     inputTel.addEventListener("blur", (e) => {
       e.target.value = e.target.value.replace(/^[\-]+/g, "");
@@ -58,7 +58,10 @@ const validation = () => {
   });
 
   messageArea.addEventListener("input", (event) => {
-    event.target.value = event.target.value.replace(/[^а-яА-ЯёЁ\s\-]/g, "");
+    event.target.value = event.target.value.replace(
+      /[^а-яА-Я-\s0-9\(\)\.\,\:\"\!\?]/g,
+      ""
+    );
   });
   messageArea.addEventListener("blur", (e) => {
     e.target.value = e.target.value.replace(/^[\s\-]+/g, "");

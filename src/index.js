@@ -28,4 +28,8 @@ slider(
 calc(100);
 swiperFunc();
 
-sendForm("form1");
+sendForm({ formID: "form1", someElem: [{ type: "block", id: "total" }] });
+
+sendForm({ formID: "form2", someElem: [{ type: "block", id: "total" }] });
+
+sendForm({ formID: "form3", someElem: [{ type: "block", id: "total" }] });
