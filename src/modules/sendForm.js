@@ -30,6 +30,31 @@ const sendForm = ({ formID, someElem = [] }) => {
     return success;
   };
 
+  const showStatus = (status) => {
+    if (status === "error") {
+      statusBLock.style.color = "red";
+      statusBLock.innerHTML = errorText;
+    } else if (status === "success") {
+      statusBLock.innerHTML = "&#128077; " + successText;
+    } else if (status === "load") {
+      statusBLock.innerHTML = `<div class='preloader'>
+    <svg width = '25px' height='25px' class='preloader__image' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
+      <path fill='currentColor'
+        d='M304 48c0 26.51-21.49 48-48 48s-48-21.49-48-48 21.49-48 48-48 48 21.49 48 48zm-48 368c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zm208-208c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zM96 256c0-26.51-21.49-48-48-48S0 229.49 0 256s21.49 48 48 48 48-21.49 48-48zm12.922 99.078c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.491-48-48-48zm294.156 0c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.49-48-48-48zM108.922 60.922c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.491-48-48-48z'>
+      </path>
+    </svg>
+  </div>`;
+    }
+
+    statusBLock.style.marginTop = "5px";
+    statusBLock.style.color = "white";
+    form.append(statusBLock);
+
+    setTimeout(() => {
+      statusBLock.remove();
+    }, 5000);
+  };
+
   const sendData = (data) => {
     return fetch("https://jsonplaceholder.typicode.com/posts", {
       method: "POST",
@@ -45,8 +70,7 @@ const sendForm = ({ formID, someElem = [] }) => {
     const formData = new FormData(form);
     const formBody = {};
 
-    statusBLock.textContent = loadText;
-    form.append(statusBLock);
+    showStatus("load");
 
     formData.forEach((val, key) => {
       formBody[key] = val;
@@ -64,13 +88,16 @@ const sendForm = ({ formID, someElem = [] }) => {
     if (validate(formElements)) {
       sendData(formBody)
         .then((data) => {
-          statusBLock.textContent = successText;
+          // statusBLock.innerHTML = "&#128077; " + successText;
+          showStatus("success");
           formElements.forEach((input) => {
             input.value = "";
           });
         })
         .catch((error) => {
-          statusBLock.textContent = errorText;
+          // statusBLock.style.color = "red";
+          // statusBLock.innerHTML = errorText;
+          showStatus("error");
         });
     } else {
       alert("Данные не валидны");
