@@ -36,6 +36,7 @@ const sendForm = ({ formID, someElem = [] }) => {
       statusBLock.innerHTML = errorText;
     } else if (status === "success") {
       statusBLock.innerHTML = "&#128077; " + successText;
+      statusBLock.style.color = "white";
     } else if (status === "load") {
       statusBLock.innerHTML = `<div class='preloader'>
     <svg width = '25px' height='25px' class='preloader__image' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
@@ -44,10 +45,11 @@ const sendForm = ({ formID, someElem = [] }) => {
       </path>
     </svg>
   </div>`;
+      statusBLock.style.color = "white";
     }
 
     statusBLock.style.marginTop = "5px";
-    statusBLock.style.color = "white";
+
     form.append(statusBLock);
 
     setTimeout(() => {
