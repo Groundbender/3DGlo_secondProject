@@ -43,15 +43,33 @@ const calc = (price = 100) => {
     if (calcType.value && calcSquare.value) {
       totalValue =
         price * calcTypeValue * calcSquareValue * calcCountValue * calcDayValue;
-      // total.textContent = render(totalValue);
     } else {
       totalValue = 0;
     }
 
-    // total.textContent = totalValue;
-    // console.log(totalValue);
     return totalValue;
   };
+  const animationCheck = () => {
+    let prevValue = +total.textContent;
+    let totalValue = countCalc();
+    animate({
+      duration: 500,
+      timing(timeFraction) {
+        return timeFraction;
+      },
+      draw(progress) {
+        if (prevValue > 0) {
+          total.textContent =
+            prevValue + Math.round((totalValue - prevValue) * progress);
+        } else {
+          total.textContent = Math.round(totalValue * progress);
+        }
+
+        console.log(total.textContent);
+      },
+    });
+  };
+
   calcBlock.addEventListener("input", (e) => {
     if (
       e.target === calcType ||
@@ -59,16 +77,8 @@ const calc = (price = 100) => {
       e.target === calcCount ||
       e.target === calcDay
     ) {
-      let totalValue = countCalc();
-      animate({
-        duration: 500,
-        timing(timeFraction) {
-          return timeFraction;
-        },
-        draw(progress) {
-          total.textContent = Math.round(totalValue * progress);
-        },
-      });
+      // countCalc();
+      animationCheck();
     }
   });
 };
