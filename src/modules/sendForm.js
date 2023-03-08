@@ -2,27 +2,40 @@ const sendForm = ({ formID, someElem = [] }) => {
   const form = document.getElementById(formID);
   const statusBLock = document.createElement("div");
   const loadText = "Загрузка...";
-  const errorText = "Ошибка...";
+  const errorText = "Упс, что-то пошло не так...";
   const successText = "Спасибо! Наш менеджер с вами свяжется ";
 
+  const isInvalid = (elem, status) => {
+    if (!status) {
+      elem.style.outline = "1px solid red";
+      elem.style.border = "1px solid red";
+    }
+
+    return elem;
+  };
   const validate = (list) => {
     let success = true;
     list.forEach((input) => {
-      if (input.classList.contains("form-name")) {
-        if (/[^а-яА-ЯёЁ\s]/g.test(input.value)) {
+      if (input.name === "user_name") {
+        if (!/[а-яА-ЯёЁ\s]{2,}/g.test(input.value)) {
           success = false;
+          isInvalid(input, success);
         }
       } else if (input.classList.contains("form-email")) {
         if (/[^a-zA-Z\d\@\-\_\.\!\~\*\']/g.test(input.value)) {
           success = false;
+          isInvalid(input, success);
         }
-      } else if (input.classList.contains("form-phone")) {
-        if (/[^\d\(\)\-\+]/g.test(input.value)) {
+      } else if (input.name === "user_phone") {
+        if (!/[\d\(\)\-\+]{6,}/g.test(input.value)) {
           success = false;
+          isInvalid(input, success);
         }
-      } else if (input.classList.contains("mess")) {
+      } else if (input.name === "user_message") {
         if (/[^а-яА-Я-\s0-9\(\)\.\,\:\"\!\?]/g.test(input.value)) {
           success = false;
+
+          isInvalid(input, success);
         }
       }
     });
@@ -94,6 +107,8 @@ const sendForm = ({ formID, someElem = [] }) => {
           showStatus("success");
           formElements.forEach((input) => {
             input.value = "";
+            input.style.outline = "none";
+            input.style.border = "none";
           });
         })
         .catch((error) => {
@@ -102,7 +117,7 @@ const sendForm = ({ formID, someElem = [] }) => {
           showStatus("error");
         });
     } else {
-      alert("Данные не валидны");
+      showStatus("error");
     }
   };
 

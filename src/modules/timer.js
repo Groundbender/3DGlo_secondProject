@@ -40,10 +40,10 @@ const timer = (deadline) => {
       timerSeconds.textContent = addZero(0);
     }
   };
-  // updateCLock();
-  idUpdateClock = setInterval(updateCLock, 1000);
   updateCLock();
+  idUpdateClock = setInterval(updateCLock, 1000);
+  // updateCLock();
 };
-timer("24 february 2023");
+// timer("10 marth 2023");
 
 export default timer;

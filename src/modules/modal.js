@@ -32,11 +32,16 @@ const modal = () => {
   buttons.forEach((btn) => {
     btn.addEventListener("click", () => {
       modal.style.display = "block";
+      let scrollWidth =
+        window.innerWidth - document.documentElement.clientWidth;
+      console.log(scrollWidth);
+      document.body.style.paddingRight = `${scrollWidth}px`;
       document.body.style.overflow = "hidden";
+
       modalDialog.style.transform = "translateY(-100px) translateX(-50px)";
       if (screen.width > 768) {
         animate({
-          duration: 1000,
+          duration: 500,
           timing(timeFraction) {
             return timeFraction;
           },
@@ -64,6 +69,7 @@ const modal = () => {
   document.addEventListener("keyup", (e) => {
     if (e.key === "Escape") {
       modal.style.display = "none";
+      document.body.style.paddingRight = `0px`;
       document.body.style.overflow = "";
     }
   });
