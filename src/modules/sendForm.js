@@ -2,7 +2,7 @@ const sendForm = ({ formID, someElem = [] }) => {
   const form = document.getElementById(formID);
   const statusBLock = document.createElement("div");
   const loadText = "Загрузка...";
-  const errorText = `Заполните поле `;
+  const errorText = "Упс, что-то пошло не так...";
   const successText = "Спасибо! Наш менеджер с вами свяжется ";
 
   const isInvalid = (elem, status) => {
@@ -34,13 +34,13 @@ const sendForm = ({ formID, someElem = [] }) => {
         }
       } else if (input.classList.contains("form-email")) {
         if (
-          !/[a-zA-Z\d\@\-\_\.\!\~\*\']+(\.[-A-Za-z]{2,})/g.test(input.value)
+          !/[a-zA-Z\d\-\_\.\!\~\*\'\@]+\.{1,2}[-A-Za-z]{2,}/g.test(input.value)
         ) {
           success = false;
           isInvalid(input, success);
         }
       } else if (input.name === "user_phone") {
-        if (!/[\d\(\)\-\+]{6,}/g.test(input.value)) {
+        if (!/[\d\(\)\-\+]{9,}/g.test(input.value)) {
           success = false;
           isInvalid(input, success);
         }

@@ -8,6 +8,7 @@ import slider from "./modules/slider";
 import calc from "./modules/calc";
 import { swiperFunc } from "./modules/swiper";
 import sendForm from "./modules/sendForm";
+import { phoneMask } from "./modules/phoneMask";
 
 timer("25 marth 2023");
 menu();
@@ -33,3 +34,4 @@ sendForm({ formID: "form1", someElem: [{ type: "block", id: "total" }] });
 sendForm({ formID: "form2", someElem: [{ type: "block", id: "total" }] });
 
 sendForm({ formID: "form3", someElem: [{ type: "block", id: "total" }] });
+phoneMask();

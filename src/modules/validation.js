@@ -46,9 +46,9 @@ const validation = () => {
       e.target.value = e.target.value.replace(/\s{2,}/g, " ");
       e.target.value = e.target.value.replace(/\-{2,}/g, "-");
     });
-    inputTel.addEventListener("input", (e) => {
-      e.target.value = e.target.value.replace(/[^\d\(\)\-\+]/g, "");
-    });
+    // inputTel.addEventListener("input", (e) => {
+    //   e.target.value = e.target.value.replace(/^[^\d\(\)\-\+]/g, "");
+    // });
     inputTel.addEventListener("blur", (e) => {
       e.target.value = e.target.value.replace(/^[\-]+/g, "");
       e.target.value = e.target.value.replace(/[\-]+$/g, "");
