@@ -2,14 +2,25 @@ const sendForm = ({ formID, someElem = [] }) => {
   const form = document.getElementById(formID);
   const statusBLock = document.createElement("div");
   const loadText = "Загрузка...";
-  const errorText = "Упс, что-то пошло не так...";
+  const errorText = `Заполните поле `;
   const successText = "Спасибо! Наш менеджер с вами свяжется ";
 
   const isInvalid = (elem, status) => {
     if (!status) {
       elem.style.outline = "1px solid red";
       elem.style.border = "1px solid red";
+      // statusBLock.innerHTML = `Пожалуйста, заполните поле "${elem
+      //   .getAttribute("placeholder")
+      //   .toLowerCase()}" правильно`;
     }
+    setTimeout(() => {
+      elem.style.outline = "none";
+      elem.style.border = "none";
+    }, 5000);
+    elem.addEventListener("focus", (e) => {
+      elem.style.outline = "none";
+      elem.style.border = "none";
+    });
 
     return elem;
   };
@@ -22,7 +33,9 @@ const sendForm = ({ formID, someElem = [] }) => {
           isInvalid(input, success);
         }
       } else if (input.classList.contains("form-email")) {
-        if (/[^a-zA-Z\d\@\-\_\.\!\~\*\']/g.test(input.value)) {
+        if (
+          !/[a-zA-Z\d\@\-\_\.\!\~\*\']+(\.[-A-Za-z]{2,})/g.test(input.value)
+        ) {
           success = false;
           isInvalid(input, success);
         }
@@ -95,10 +108,18 @@ const sendForm = ({ formID, someElem = [] }) => {
       const element = document.getElementById(elem.id);
       if (elem.type === "block") {
         formBody[elem.id] = element.textContent;
+        console.log(typeof formBody[elem.id]);
       } else if (elem.type === "input") {
         formBody[elem.id] = element.value;
       }
     });
+
+    if (formBody.total == "0") {
+      delete formBody.total;
+    }
+    if (!document.querySelector("#form2-message").value.trim()) {
+      delete formBody.user_message;
+    }
 
     if (validate(formElements)) {
       sendData(formBody)
@@ -109,6 +130,9 @@ const sendForm = ({ formID, someElem = [] }) => {
             input.value = "";
             input.style.outline = "none";
             input.style.border = "none";
+            document.querySelector("#total").textContent = "0";
+            document.querySelector(".calc-type").value = "";
+            document.querySelector(".calc-square").value = "";
           });
         })
         .catch((error) => {

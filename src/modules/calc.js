@@ -64,8 +64,6 @@ const calc = (price = 100) => {
         } else {
           total.textContent = Math.round(totalValue * progress);
         }
-
-        console.log(total.textContent);
       },
     });
   };

@@ -9,7 +9,7 @@ import calc from "./modules/calc";
 import { swiperFunc } from "./modules/swiper";
 import sendForm from "./modules/sendForm";
 
-timer("10 marth 2023");
+timer("25 marth 2023");
 menu();
 modal();
 anchorsAnimate();
