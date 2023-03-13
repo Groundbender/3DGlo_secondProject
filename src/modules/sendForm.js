@@ -9,9 +9,6 @@ const sendForm = ({ formID, someElem = [] }) => {
     if (!status) {
       elem.style.outline = "1px solid red";
       elem.style.border = "1px solid red";
-      // statusBLock.innerHTML = `Пожалуйста, заполните поле "${elem
-      //   .getAttribute("placeholder")
-      //   .toLowerCase()}" правильно`;
     }
     setTimeout(() => {
       elem.style.outline = "none";
